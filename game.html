@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Hakimi | Arcade Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="dark-theme">
+
+    <nav class="navbar">
+        <div class="nav-logo"><span>Portfolio</span></div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="game.html" class="active">Arcade Zone</a></li>
+            <li><button id="themeToggleBtn" class="btn-theme-toggle">Switch Theme</button></li>
+        </ul>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <main class="container page-padding">
+        <div class="arcade-wrapper">
+            <h2 class="section-title">Mini-Arcade Hub</h2>
+            
+            <div class="arcade-tabs">
+                <button class="tab-btn active" id="tabGame1">Jet Alien Defence</button>
+                <button class="tab-btn" id="tabGame2">Sky High Construction</button>
+            </div>
+
+            <div id="wrapperGame1" class="game-content-wrapper active-game">
+                <p class="game-instruction">Move your mouse to control the custom Fighter Jet. Click to discharge high-velocity plasma blasters.</p>
+                <div class="game-container-box">
+                    <div class="game-stats">
+                        <div>Score: <span id="gameScore1" class="highlight">0</span></div>
+                        <div>Shield Health: <span id="gameHealth1" style="color: #ff4a5a; font-weight: bold;">100%</span></div>
+                    </div>
+                    <canvas id="gameCanvas1" width="600" height="400"></canvas>
+                    <button id="btnStartGame1" class="btn-submit" style="margin-top: 15px;">Launch Fighter Jet Intercept</button>
+                </div>
+            </div>
+
+            <div id="wrapperGame2" class="game-content-wrapper">
+                <p class="game-instruction">Press the drop button to lay building slabs. Alignment cuts off excess segments. Stack cleanly!</p>
+                <div class="game-container-box">
+                    <div class="game-stats">
+                        <div>Slabs Tower Height: <span id="gameScore2" class="highlight">0 Floors</span></div>
+                        <div>Status: <span id="gameStatus2" style="color: #ffb703;">Ready to Build</span></div>
+                    </div>
+                    <canvas id="gameCanvas2" width="600" height="400"></canvas>
+                    <button id="btnDropBlock2" class="btn-submit" style="margin-top: 15px; margin-bottom: 10px;">Drop Slabs Segment</button>
+                    <button id="btnStartGame2" class="btn-submit style-secondary">Initialize Foundation Setup</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
