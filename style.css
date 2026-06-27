@@ -97,15 +97,35 @@ body {
     color: var(--primary-color);
 }
 
+/* ===== REKA BENTUK BUTTON THEME BARU (COOL & LAWA) ===== */
 .btn-theme-toggle {
-    background: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color), #00ffcc);
     color: #0b111e;
-    border: none;
-    padding: 6px 14px;
-    border-radius: 6px;
-    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 8px 18px;
+    border-radius: 25px; /* Bentuk pil moden */
+    font-weight: 700;
     cursor: pointer;
     font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px var(--primary-glow);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-transform: uppercase;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Efek Hover Dinamik */
+.btn-theme-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px var(--primary-glow);
+    filter: brightness(1.1);
+}
+
+.btn-theme-toggle:active {
+    transform: translateY(0);
 }
 
 .menu-toggle {
