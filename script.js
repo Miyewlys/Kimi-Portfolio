@@ -13,17 +13,35 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // =============================================
-    // B. DYNAMIC THEME TOGGLE (Global Feature)
+    // B. DYNAMIC THEME TOGGLE WITH PERSISTENCE (Kekal & Cool)
     // =============================================
     const themeToggleBtn = document.getElementById("themeToggleBtn");
+    
+    // Fungsi untuk mengemaskini teks & emoji pada button
+    const updateButtonUI = (theme) => {
+        if (!themeToggleBtn) return;
+        if (theme === "dark-theme") {
+            themeToggleBtn.innerHTML = "☀️ Light Mode";
+        } else {
+            themeToggleBtn.innerHTML = "🌙 Dark Mode";
+        }
+    };
+
+    // Semak tema yang disimpan dalam localStorage sebelum ini (Default: dark-theme)
+    const savedTheme = localStorage.getItem("portfolio-theme") || "dark-theme";
+    document.body.className = savedTheme;
+    updateButtonUI(savedTheme);
+
     if (themeToggleBtn) {
         themeToggleBtn.addEventListener("click", () => {
             if (document.body.classList.contains("dark-theme")) {
                 document.body.classList.replace("dark-theme", "light-theme");
-                themeToggleBtn.innerText = "Dark Theme";
+                localStorage.setItem("portfolio-theme", "light-theme");
+                updateButtonUI("light-theme");
             } else {
                 document.body.classList.replace("light-theme", "dark-theme");
-                themeToggleBtn.innerText = "Switch Theme";
+                localStorage.setItem("portfolio-theme", "dark-theme");
+                updateButtonUI("dark-theme");
             }
         });
     }
@@ -116,7 +134,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const trackInputGame1 = (clientY) => {
             const rect = canvas1.getBoundingClientRect();
-            // Maps responsive view coordinates cleanly back to internal 600x400 space
             const scaleY = 400 / rect.height;
             jetY = (clientY - rect.top) * scaleY;
             if (jetY < 25) jetY = 25;
@@ -173,7 +190,6 @@ document.addEventListener("DOMContentLoaded", () => {
             ctx1.fillStyle = "#02050d";
             ctx1.fillRect(0, 0, 600, 400);
 
-            // Particle Engine Update
             particles.forEach((p, index) => {
                 p.x += p.vx; p.y += p.vy; p.alpha -= 0.02;
                 if (p.alpha <= 0) { particles.splice(index, 1); return; }
@@ -184,7 +200,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 ctx1.restore();
             });
 
-            // Starfield Animation
             ctx1.fillStyle = "rgba(255, 255, 255, 0.6)";
             stars.forEach(star => {
                 star.x -= star.speed;
@@ -212,7 +227,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 lastShotTime = now;
             }
 
-            // Draw Fighter Jet
             ctx1.save();
             ctx1.shadowBlur = hasWeaponPower ? 20 : 8;
             ctx1.shadowColor = hasWeaponPower ? "#00ffcc" : "#00f2fe";
@@ -239,7 +253,6 @@ document.addEventListener("DOMContentLoaded", () => {
             ctx1.lineTo(38, jetY + 4); ctx1.closePath(); ctx1.fill();
             ctx1.restore();
 
-            // Process Lasers
             lasers.forEach((laser, lIdx) => {
                 laser.x += 10;
                 laser.y += laser.vy;
@@ -251,7 +264,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (laser.x > 600 || laser.y < 0 || laser.y > 400) lasers.splice(lIdx, 1);
             });
 
-            // Process Power-Ups
             items.forEach((item, iIdx) => {
                 item.x -= item.speed;
                 ctx1.save();
@@ -279,7 +291,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (item.x < -20) items.splice(iIdx, 1);
             });
 
-            // Process Aliens
             aliens.forEach((alien, aIdx) => {
                 alien.x -= alien.speed;
                 alien.pulse += 0.07;
@@ -473,7 +484,6 @@ document.addEventListener("DOMContentLoaded", () => {
     function resizeCanvases() {
         [canvas1, canvas2].forEach(canvas => {
             if (canvas) {
-                // Forces hardware rendering resolution to lock to internal design frame mapping
                 canvas.width = 600;
                 canvas.height = 400;
             }
